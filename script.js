@@ -1,5 +1,7 @@
 
 
+const apiKey= "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";
+
 const monuments = ["Hauz Khas Fort - a medieval fort and popular tourist spot in New Delhi",
     "Jantar Mantar - an astronomical observatory with unique architectural instruments",
     "Firoz Shah Kotla - a 14th-century fortress ruins with a historical significance",
@@ -166,7 +168,10 @@ function displayArray(array1, array2, array3, array4, purpose, main, semi) {
     }
 }
 
-function submitValues() {
+
+
+async function submitValues() {
+    
     var days = document.getElementById("days").value;
     var place = document.getElementById("place").value;
     var purpose = document.getElementById("purpose").value;
@@ -183,18 +188,42 @@ function submitValues() {
         purpose: purpose,
         selectedPlaces: selectedPlaces
     };
-    console.log("here");
     // runScript();
-    console.log(data);
-    // var jsonData = JSON.stringify(data);
-    // fs.writeFile('values.json', jsonData, function (err) {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         console.log('Data saved to file');
-    //     }
-    // });
+
+
+
+    const jsonData = {"str" : `Hello ChatGPT, Please help me generate a ${data.days} day itinerary ${data.selectedPlaces}`};
+
+
+
+    var nikal = null;
+  
+    try {
+      const response = await fetch('/response', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData) // The JSON data we want to send in string format
+      });
+      const data = await response.text();
+      nikal = data;
+    } catch (error) {
+      console.error(error);
+    }
+    document.getElementById('test').textContent = nikal;
+    console.log(nikal);
+  
+
+  
+
+
+
+ 
 }
+
+
+
 
 function generateLists() {
     var days = document.getElementById("days").value;
