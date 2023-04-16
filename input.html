@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <script>
+        function display() {
+            var x = document.getElementById("input").elements.namedItem("place").value;
+            
+            var y = document.getElementById("input").elements.namedItem("days").value;
+            
+            var z = document.getElementById("input").elements.namedItem("purpose").value;
+            console.log(x);
+            console.log(y);
+            console.log(z);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="bg-img">
+        <form id="input" class="container">
+            <h1>Details</h1>
+
+            <label for="place"><b>Enter place to explore</b></label>
+            <input type="text" name="place" required>
+
+            <label for="days"><b>Enter number of days</b></label>
+            <input type="number" name="days" required>
+
+            <label for="purpose"><b>Purpose of trip</b></label>
+            <input type="text" name="purpose" required>
+
+            <button type="submit" class="btn" onclick="display()">GetAway</button>
+        </form>
+    </div>
+</body>
+
+</html>

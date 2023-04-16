@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Array Display</title>
+</head>
+
+<body>
+	<script>
+		//monuments
+		var monuments = ["HAUZ KHAS FORT", "HUMAYUNS TOMB", "JANTAR MANTAR", "FIROZ SHAH KOTLA", "CONNAUGHT PLACE", "HAUZ KHAS VILLAGE",
+			"KINGDOM OF DREAMS", "WORLDS OF WONDER", "WASTE OF WONDER", "AKSHARDHAM TEMOLE", "THE GARDEN OF SENSES",
+			"RED FORT", "QUTUB MINAR", "INDIA GATE", "LOTUS TEMPLE", "JAMA MASJID", "DEER PARK", "DILLI HAAT",
+			"CHAMPA GALI", "NATIONAL GALLERY OF MODERN ART"];
+		//MALLS
+		var malls = ["SELECT CITY WALK", "DLF PROMENADE MALL", "DLF EMPORIO", "ANSAL PLAZA", "AMBIENCE MALL", "DLF PLACE",
+			"PACIFIC MALL", "TDI MALL", "CITY SQUARE MALL", "METRO WALK", "DLF CITY CENTER", "V3S MALL",
+			"1_CROSS RIVER MALL", "2_THE CHANAKYA MALL", "2_MALL OF INDIA"];
+		//MARKETS
+		var markets = ["SAROJINI NAGAR", "JANPATH", "PALIKA BAZAR", "CHANDANI CHOWK", "LAJPAT NAGAR", "KHAN MARKET", "GREATER KAILASH",
+			"CHAWRI BAZAR", "KIRTI NAGAR", "KAMLA NAGAR", "DARYAGANJ BOOK MARKET", "SARDAR BAZAAR", "JWALA HERI",
+			"GAFFAR MARKET", "RAJORI GARDEN", "1_MEENA BAZAAR", "2_SUNDAR NAGAR", "3_PANCHKUIAN MARG", "4_SHANKAR MARKET",
+			"5_DARIBA KHAN"];
+		//TEMPLES
+		var temples = ["HANUMAN MANDIR", "SAI BABA MANDIR", "ISKON TEMPLE", "BHAIRON MANDIR", "GAURI SHANKAR TEMPLE",
+			"LAKSHMI NARAYAN TEMPLE", "LADAKH BUDDHIST VIHAR", "ARYA SAMAJ MANDIR", "SHRI JAGANNATH MANDIR",
+			"JHANDEWALAN MANDIR", "KALKAJI TEMPLE", "BANGLA SAHIB GURUDWARA", "YOGMAYA MANDIR", "JAMA MASJID",
+			"NIZZAMUDIN ALI DARGAH", "CHATTARPUR MANDIR", "MAHABODHI MANNDIR", "SHRI DIGAMBAR JAIN LAL MANDIR",
+			"SVETAMBARA JAIN TEMPLE", "AKSHARDHAM TEMPLE"];
+		function shuffle(array) {
+			let currentIndex = array.length, randomIndex;
+
+			// While there remain elements to shuffle.
+			while (currentIndex != 0) {
+
+				// Pick a remaining element.
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex--;
+
+				// And swap it with the current element.
+				[array[currentIndex], array[randomIndex]] = [
+					array[randomIndex], array[currentIndex]];
+			}
+
+			return array;
+		}
+		function displayArray() {
+			var array;
+			var container = document.getElementById("container");
+			for (var i = 0; i < 5; i++) {
+				var div = document.createElement("div");
+				var checkbox = document.createElement("input");
+				checkbox.type = "checkbox";
+				checkbox.value = array[i];
+				div.appendChild(checkbox);
+				var label = document.createElement("label");
+				label.innerHTML = array[i];
+				div.appendChild(label);
+				container.appendChild(div);
+			}
+		}
+		function submit() {
+			var selectedPlaces = [];
+			var checkboxes = document.getElementsByTagName("input");
+			for (var i = 0; i < checkboxes.length; i++) {
+				if (checkboxes[i].checked) {
+					selectedPlaces.push(checkboxes[i].value);
+				}
+			}
+			var selectedDiv = document.getElementById("selected");
+			selectedDiv.innerHTML = "Selected Places: " + selectedPlaces.join(", ");
+		}
+		displayArray("monuments");
+	</script>
+</body>
+
+</html>

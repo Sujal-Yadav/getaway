@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+
+    <!-- <link rel="stylesheet" href="Styles/style.css"> -->
+    <title>Create an Itinerary</title>
+    <script>
+        function generate(event) {
+            event.preventDefault();
+            const x = document.getElementById("input").elements.namedItem("place").value;
+
+            const y = document.getElementById("input").elements.namedItem("days").value;
+
+            const z = document.getElementById("input").elements.namedItem("purpose").value;
+            const openai = new OpenAIApi(new Configuration({
+                apiKey: process.env.API_KEY
+            }))
+            openai.createChatCompletion({
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: `Hello ChatGPT, Please help me generate a ${y} day itinerary for ${x}. I want to focus more on the ${z} this trip.` }],
+            }).then(res => {
+                // document.getElementById('formData').innerHTML = `
+                //     <p>${res.data.choices[0].message.content}</p>
+                // `;
+                console.log(res.data.choices[0].message.content)
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div class="bg-img">
+        <form id="input" class="container">
+            <h1>Details</h1>
+
+            <label for="place"><b>Enter place to explore</b></label>
+            <input type="text" name="place" required>
+
+            <label for="days"><b>Enter number of days</b></label>
+            <input type="number" name="days" required>
+
+            <label for="purpose"><b>Purpose of trip</b></label>
+            <input type="text" name="purpose" required>
+
+            <button type="submit" class="btn" onclick="generate(event)">GetAway</button>
+        </form>
+    </div>
+    <div id="display"></div>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Display JSON Data in HTML</title>
+  <style>
+    h2{
+        text-align: center;
+    }
+    p{
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: large;
+        text-align: center;
+    }
+      /* div{
+        border: 1px solid black;
+      } */
+  </style>
+</head>
+<body>
+  <div id="content"></div>
+
+  <script>
+    // make an HTTP request to the JSON file
+    fetch('output.json')
+      .then(response => response.json()) // parse the response as JSON
+      .then(data => {
+        // get the content from the data object
+        const content = data.completion;
+
+        // split the content into an array of strings based on the newline character (\n)
+        const contentArray = content.split('\n');
+
+        // create a new array to hold the HTML tags
+        const htmlArray = [];
+
+        // loop through the contentArray and generate HTML tags for each item
+        for (let i = 0; i < contentArray.length; i++) {
+          // get the current item
+          const currentItem = contentArray[i];
+
+          // check if the current item starts with "Day"
+
+          if (currentItem.startsWith("Day")) {
+            // create a new <h2> tag for the day
+            htmlArray.push(`<h2>${currentItem}</h2>`);
+          } else {
+            // create a new <p> tag for the activity
+            htmlArray.push(`<p>${currentItem}</p>`);
+          }
+        }
+
+        // join the htmlArray into a single string
+        const htmlString = htmlArray.join('');
+
+        // set the HTML content of the content element to the generated HTML string
+        const contentElement = document.getElementById('content');
+        contentElement.innerHTML = htmlString;
+      })
+      .catch(error => console.error(error)); // log any errors to the console
+  </script>
+</body>
+</html>
